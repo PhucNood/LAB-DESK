@@ -6,6 +6,8 @@
 package controller;
 
 import View.View;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -35,8 +37,10 @@ public class Controler {
         this.text = view.getTxtDisplay();
 
         ControlAction();
+       
+         
     }
-
+    
     private void ControlAction() {
         // Press Number action:
         view.getBtn0().addActionListener((ae) -> { // use lamda expression for funtional interface ActionListener
@@ -99,6 +103,7 @@ public class Controler {
         view.getBtnBack().addActionListener((ae) -> {
             PressBack();
         });
+      
         //press dot action
         view.getBtnDot().addActionListener((ae) -> {
             pressDot();
@@ -256,9 +261,7 @@ public class Controler {
         if (curentNumber.doubleValue() == 0) {
             text.setText("ERROR");
         } else {
-            curentNumber = new BigDecimal(1).divide(curentNumber, 7, RoundingMode.HALF_DOWN).stripTrailingZeros();
-           
-            text.setText(curentNumber.toPlainString());
+            text.setText(new BigDecimal(Double.valueOf(1/curentNumber.doubleValue()).toString()).stripTrailingZeros().toString()  );
             incal = false; // make it to be first number maybe
             
             
@@ -282,7 +285,7 @@ public class Controler {
             reset = true;
         } else {
             curentNumber = getNumber();
-            double sqrt = Math.sqrt(curentNumber.doubleValue());
+            double sqrt = Math.sqrt(curentNumber.doubleValue()); // get double
             text.setText(fortmat.format(sqrt));
             incal = false;
             reset = true;
