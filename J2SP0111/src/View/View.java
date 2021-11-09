@@ -182,7 +182,7 @@ public class View extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtDisplay.setEditable(false);
-        txtDisplay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtDisplay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtDisplay.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         txtDisplay.setText("0");
 

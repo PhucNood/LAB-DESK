@@ -162,7 +162,7 @@ public class Controler {
             } else { // after press oper
                 secondNum = getNumber();
                 switch (operator) {
-                    case "+":// Bigdecimal not have overload contructor for Double but Double good repressent than primal double 
+                    case "+":// Bigdecimal not have overload contructor for Double but Double better represent than primitive type double
                         firstNum = new BigDecimal(Double.valueOf(firstNum.doubleValue()+secondNum.doubleValue()).toString()); 
                         break;
                     case "-":
@@ -200,6 +200,7 @@ public class Controler {
             operator = null;
         }
     }
+   
 
     private void PressBack() {
         StringBuilder builder = new StringBuilder(text.getText());
@@ -247,22 +248,22 @@ public class Controler {
 
     }
 
-    private void pressNegate() {
-        equal();
-        text.setText(getNumber().negate().toPlainString());
-        incal = false;// make it to be first number maybe
+    private void pressNegate() {       
+        text.setText(getNumber().negate().toString());
+      incal = false;// make it to be first number maybe
 
     }
 
-    private void pressInvert() {
-        equal();
+    private void pressInvert() {     
         curentNumber = getNumber(); // take number in text
         if (curentNumber.doubleValue() == 0) {
             text.setText("ERROR");
         } else {
-            text.setText(new BigDecimal(Double.valueOf(1/curentNumber.doubleValue()).toString()).stripTrailingZeros().toString()  );
+            String invert_value = Double.valueOf(1/curentNumber.doubleValue()).toString();
+            text.setText(new BigDecimal(invert_value).stripTrailingZeros().toPlainString() );
+           
             incal = false; // make it source to calculator
-            
+            secondNum = new BigDecimal(invert_value);
             
         }
         reset = true; // if you press any number get new number
@@ -270,10 +271,9 @@ public class Controler {
     }
 
     private void pressPercent() {
-        equal();
         curentNumber = getNumber();
         curentNumber = curentNumber.divide(new BigDecimal(100));
-        text.setText(curentNumber.toPlainString());
+        text.setText(curentNumber.stripTrailingZeros().toPlainString());
         incal = false;
         reset = true;
     }
@@ -285,7 +285,7 @@ public class Controler {
         } else {
             curentNumber = getNumber();
             double sqrt = Math.sqrt(curentNumber.doubleValue()); // Use Math librari for square root
-            text.setText(Double.valueOf(sqrt).toString()); 
+            text.setText( new BigDecimal( Double.valueOf(sqrt).toString()).stripTrailingZeros().toPlainString() ); 
             incal = false;
             reset = true;
         }
