@@ -29,7 +29,6 @@ public class Controler {
     private BigDecimal firstNum = new BigDecimal("0");
     private BigDecimal secondNum;
     private String operator = null;
-    private DecimalFormat fortmat = new DecimalFormat("0.#########");
     private JTextField text;
 
     public Controler(View view) {
@@ -163,14 +162,14 @@ public class Controler {
             } else { // after press oper
                 secondNum = getNumber();
                 switch (operator) {
-                    case "+":
-                        firstNum = firstNum.add(secondNum);
+                    case "+":// Bigdecimal not have overload contructor for Double but Double good repressent than primal double 
+                        firstNum = new BigDecimal(Double.valueOf(firstNum.doubleValue()+secondNum.doubleValue()).toString()); 
                         break;
                     case "-":
-                        firstNum = firstNum.subtract(secondNum);
+                        firstNum = new BigDecimal(Double.valueOf(firstNum.doubleValue()-secondNum.doubleValue()).toString());
                         break;
                     case "*":
-                        firstNum = firstNum.multiply(secondNum).setScale(6, RoundingMode.HALF_DOWN);
+                        firstNum = new BigDecimal(Double.valueOf(firstNum.doubleValue()*secondNum.doubleValue()).toString());
                         break;
                     case "/":
                         if (secondNum.doubleValue() == 0) {
@@ -178,7 +177,7 @@ public class Controler {
                             reset = true; // error reset
                             return;
                         } else {
-                            firstNum = firstNum.divide(secondNum, 7, RoundingMode.HALF_UP);
+                           firstNum = new BigDecimal(Double.valueOf(firstNum.doubleValue()/secondNum.doubleValue()).toString());
                             break;
                         }
 
@@ -262,11 +261,11 @@ public class Controler {
             text.setText("ERROR");
         } else {
             text.setText(new BigDecimal(Double.valueOf(1/curentNumber.doubleValue()).toString()).stripTrailingZeros().toString()  );
-            incal = false; // make it to be first number maybe
+            incal = false; // make it source to calculator
             
             
         }
-        reset = true; // to reset 
+        reset = true; // if you press any number get new number
 
     }
 
@@ -285,8 +284,8 @@ public class Controler {
             reset = true;
         } else {
             curentNumber = getNumber();
-            double sqrt = Math.sqrt(curentNumber.doubleValue()); // get double
-            text.setText(fortmat.format(sqrt));
+            double sqrt = Math.sqrt(curentNumber.doubleValue()); // Use Math librari for square root
+            text.setText(Double.valueOf(sqrt).toString()); 
             incal = false;
             reset = true;
         }
