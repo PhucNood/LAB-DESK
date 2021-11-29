@@ -1,4 +1,4 @@
-package j2sp0001;
+package resizeimage;
 
 import java.awt.*;
 import javax.swing.*;
@@ -16,20 +16,28 @@ import javax.swing.*;
  * @author ACER
  */
 public class ImageTool {
-
-    private ImageIcon ic;
-    public ImageTool(ImageIcon ic) {
-        this.ic=ic;
-    }
     
-   private javax.swing.ImageIcon getImageIcon(String path){
-       
-       return new javax.swing.ImageIcon(getClass().getResource(path));
-   }
+    
+      public javax.swing.ImageIcon getImageIcon(String path){
+          return new  javax.swing.ImageIcon(path);
+      }
+    
+     
+      public void setImagesforButton(JButton jb,javax.swing.ImageIcon ic) {
+          
+          Image image = ic.getImage().getScaledInstance(jb.getWidth()-20 , jb.getHeight()-20, Image.SCALE_SMOOTH); // creat a image scale size
+          jb.setIcon(new javax.swing.ImageIcon(image)); //add it to jbuton
+        
+      }
       
-   private void scaleImage(){
-       
-   }
+      public void setImagesforLable(JLabel jl, javax.swing.ImageIcon ic) {
+          
+         Image image = ic.getImage().getScaledInstance(jl.getWidth(), jl.getHeight(),  Image.SCALE_SMOOTH);    /*same Image button*/
+        jl.setIcon(new javax.swing.ImageIcon(image));
+      }
+      
+      
+     
       
     
 }
