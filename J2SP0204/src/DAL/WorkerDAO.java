@@ -21,7 +21,7 @@ import model.Worker;
  */
 public class WorkerDAO {
     
-    Connection conn = new DataProvider().getConnection();
+  private Connection conn = new DataProvider().getConnection();
     
     public ArrayList<Worker> getWorkers() {
         ArrayList<Worker> workers = new ArrayList<Worker>();
